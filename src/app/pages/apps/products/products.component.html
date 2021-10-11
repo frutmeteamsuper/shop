@@ -1,0 +1,83 @@
+<div class="container-fluid">
+  <div class="row page-title align-items-center">
+    <div class="col-md-3 col-xl-6">
+      <h4 class="mb-1 mt-0">Productos</h4>
+    </div>
+    <div class="col-md-9 col-xl-6 text-md-right">
+      <div class="mt-4 mt-md-0">
+        <button type="button" routerLink="/newproduct" class="btn btn-danger mr-4 mb-3  mb-sm-0"><i class="uil-plus mr-1"></i> Nuevo
+          producto</button>
+       <!--  <div class="btn-group mb-3 mb-sm-0">
+          <button type="button" class="btn btn-primary">All</button>
+        </div>
+        <div class="btn-group ml-1">
+          <button type="button" class="btn btn-white">Ongoing</button>
+          <button type="button" class="btn btn-white">Finished</button>
+        </div> -->
+<!--         <div class="btn-group ml-2 d-none d-sm-inline-block">
+          <button type="button" class="btn btn-primary btn-sm"><i class="uil uil-apps"></i></button>
+        </div>
+        <div class="btn-group d-none d-sm-inline-block">
+          <button type="button" class="btn btn-white btn-sm"><i class="uil uil-align-left-justify"></i></button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="tixs!='undefined'">
+    <div class="col-xl-4 col-lg-6" *ngFor="let product of tixs">
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <a routerLink="/detallecurso/{{product.id}}">
+              <img src="{{ product.images[0] }}" alt="" class="" style="max-height: 203px;">
+            </a>
+          <!--   <a href="javascript: void(0);">
+              <img src="{{ product.images[1] }}" alt="" class="avatar-sm m-1 rounded-circle">
+            </a> -->
+          </div>
+      <!--     <div class="badge badge-success float-right" [ngClass]="{ 'badge-warning': product.status === 'Pending'}">
+            {{ product.costPrice }}</div> -->
+        <!--   <p class="text-success text-uppercase font-size-12 mb-2"
+            [ngClass]="{ 'text-warning': product.type === 'Android'}">{{ product.description }}</p> -->
+          <h5 cl><a href="javascript: void(0)" class="text-dark">{{ product.name }}</a></h5>
+          <p class="text-muted mb-4">{{ product.brand }}</p>
+
+        </div>
+        <div class="card-body border-top">
+          <div class="row align-items-center">
+            <div class="col-sm-auto">
+              <ul class="list-inline mb-0">
+         <!--        <li class="list-inline-item pr-2">
+                  <a href="javascript: void(0)" class="text-muted d-inline-block" placement="top" ngbTooltip="Due date">
+                    <i class="uil uil-globe mr-1"></i> {{ product.lenguaje }}
+                  </a>
+                </li> -->
+                <li class="list-inline-item pr-2">
+                  <a href="javascript: void(0)" class="text-muted d-inline-block" placement="top" ngbTooltip="
+                Modelo">
+                    <i class="uil uil-bars mr-1"></i> {{ product.model }} 
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="javascript: void(0)" class="text-muted d-inline-block" placement="top" ngbTooltip="Precio">
+                    <i class="uil  uil-money-stackmr-1"></i> {{ product.price }} 
+                  </a>
+                </li>
+<!-- 
+                    <div class="badge badge-success float-right" [ngClass]="{ 'badge-warning': product.status === 'Pending'}">
+            {{ product.costPrice }}</div> -->
+
+              </ul>
+            </div>
+            <div class="col offset-sm-1">
+              <ngb-progressbar [type]="product.color" [value]="product.progress" height="5px" class="m-0">
+              </ngb-progressbar>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+  </div>
+</div>

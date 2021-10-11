@@ -1,0 +1,130 @@
+<div class="container-fluid">
+  <app-page-title title="Nuevo producto" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+      <div class="card">
+        <div class="card-body">
+          <h4 class="header-title mt-0 mb-1">Imagen del producto</h4>
+          <p class="text-muted font-13 m-b-30">Arrastra y pega la imagen del producto</p>
+
+            <ngx-file-picker
+                [uploadType]="'multi'"
+                (validationError)= "onValidationError($event)"
+                [adapter]="adapter"
+                [fileExtensions]="['pdf', 'jpeg','jpg', 'png', 'PNG', 'mp4', 'css', 'docx', 'txt']"
+                (uploadSuccess)="onUploadSuccess($event)"
+                (removeSuccess)="onRemoveSuccess($event)"
+                [showeDragDropZone]="true"
+                [showPreviewContainer]="true"
+                [accept]="'image/*'"
+                (fileAdded)="onFileAdded($event)">
+            </ngx-file-picker > 
+
+          <div class="col-12" style="padding-top: 20px;">
+
+            <form (ngSubmit)="sendTix()" [formGroup]="typeValidationForm">
+          <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label> Nombre del producto</label>
+                  <input type="text" class="form-control" formControlName="name"
+                  [ngClass]="{'is-invalid': typesubmit && type.name.errors}" placeholder="Nombre del producto" />
+                  <div *ngIf="typesubmit && type.name.errors" class="invalid-feedback">
+                    <span *ngIf="type.name.errors.required">Este campo es requerido.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label>Modelo</label>
+                  <input type="text" class="form-control" formControlName="model"
+                    [ngClass]="{'is-invalid': typesubmit && type.product.errors}" placeholder="Modelo" />
+                  <div *ngIf="typesubmit && type.product.errors" class="invalid-feedback">
+                    <span *ngIf="type.product.errors.required">Este campo es requerido.</span>
+                  </div>
+                </div>     
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label>Marca</label>
+                  <input type="text" class="form-control" formControlName="brand"
+                    [ngClass]="{'is-invalid': typesubmit && type.brand.errors}" placeholder="Marca" />
+                  <div *ngIf="typesubmit && type.brand.errors" class="invalid-feedback">
+                    <span *ngIf="type.brand.errors.required">Este campo es requerido.</span>
+                  </div>
+                </div>   
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label>Precio</label>
+                  <div>
+                    <input formControlName="price" type="text" class="form-control"
+                      [ngClass]="{'is-invalid': typesubmit && type.price.errors}"
+                      placeholder="Precio del producto" />
+                    <div *ngIf="typesubmit && type.price.errors" class="invalid-feedback">
+                      <span *ngIf="type.price.errors.required">Este campo es requerido.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             <!--  <div class="col-6">
+                <div class="form-group ">
+                    <label>Categoria
+                    </label>
+                   
+                      <select  class="form-control custom-select">
+                      <option *ngFor="let category of categoriesList ; let i = index; ">{{category.name}}</option>
+                                
+                                </select>
+                </div>
+              </div> -->
+
+              <div class="col-6">
+                <div class="form-group ">
+                  <label>Categoria
+                  <span [hidden]="loaded">Loading...</span></label>
+                  <ng-multiselect-dropdown
+                        [placeholder]="'Categorías'"
+                        [settings]="dropdownSettings"
+                        [data]="dropdownList"
+                        [(ngModel)]="selectedItems"
+                        (onSelect)="onItemSelect($event)"(onDeSelect)="onItemDeSelect($event)"
+                        (onSelectAll)="onSelectAll($event)"
+                        [ngModelOptions]="{standalone: true}">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group" [hidden]="!subs">
+                  <label>Subcategorías
+                  <span [hidden]="loaded">Loading...</span></label>
+                  <ng-multiselect-dropdown
+                        [placeholder]="'Subcategorías'"
+                        [settings]="dropdownSettings2"
+                        [data]="dropdownList2"
+                        [(ngModel)]="selectedItems2"
+                        (onSelect)="onItemSelect2($event)"
+                        (onDeSelect)="onItemDeSelect2($event)"
+                        (onSelectAll)="onSelectAll2($event)"
+                        [ngModelOptions]="{standalone: true}">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+
+              <div class="form-group mb-0">
+                <div>
+                  <button type="reset" class="btn btn-secondary waves-effect">
+                    Cancelar
+                  </button>
+                  <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
+                    Aceptar
+                  </button>
+                </div>
+              </div>
+
+          </div>
+            </form>
+          </div>
+        </div>
+      </div>
+   
+</div>
