@@ -53,8 +53,8 @@ export class DashboardComponent implements OnInit {
       });
   }
   ngOnInit() {
-  this.getTamanoSuscriber();
-  this.getTamanoDentist();
+  //this.getTamanoSuscriber();
+  //this.getTamanoDentist();
     /**
      * Fetches the data
      */

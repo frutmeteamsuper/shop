@@ -56,11 +56,11 @@ public formBuilder: FormBuilder,
 //    public tix:TixInterface;
   public categories:CategoryInterface ={}
   public tix:TixInterface ={
-    tittle:"",
-    description:"",    
+    name:"",
+    model:"",
+    brand:"",    
     images:[],
-    modules:[],
-    costPrice:""
+    price:0
   };
 //  categories:any[]=[];
   public categoryStatus:any[]=[];
@@ -204,8 +204,8 @@ public formBuilder: FormBuilder,
       name: ['', [Validators.required]],
       price: ['', [Validators.required]],
       model: ['', [Validators.required]],
-      brand: ['', [Validators.required]],
-      category: ['', [Validators.required]]
+      brand: ['', [Validators.required]]
+//      category: ['', [Validators.required]]
 //      subcategory: ['', [Validators.required]]
         });
      // this.ngFormSendPago = this.formBuilder.group({

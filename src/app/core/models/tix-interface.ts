@@ -2,7 +2,7 @@ export interface TixInterface{
 	id?:string;	
 	address?:string;
 	altitud?:string;
-	brand?:number;
+	brand?:string;
 	cantD?:number;
 	capacidad?:number;
 	category?:string;

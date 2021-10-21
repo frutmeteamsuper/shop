@@ -37,9 +37,9 @@
                 <div class="form-group">
                   <label>Modelo</label>
                   <input type="text" class="form-control" formControlName="model"
-                    [ngClass]="{'is-invalid': typesubmit && type.product.errors}" placeholder="Modelo" />
-                  <div *ngIf="typesubmit && type.product.errors" class="invalid-feedback">
-                    <span *ngIf="type.product.errors.required">Este campo es requerido.</span>
+                    [ngClass]="{'is-invalid': typesubmit && type.model.errors}" placeholder="Modelo" />
+                  <div *ngIf="typesubmit && type.model.errors" class="invalid-feedback">
+                    <span *ngIf="type.model.errors.required">Este campo es requerido.</span>
                   </div>
                 </div>     
               </div>
