@@ -22,6 +22,7 @@ export class UserWService {
 		paypal:boolean=false;
 		zelle:boolean=false;
 	categorySelected:string;
+	subcategorySelected:string;
 	editingTrek:boolean=false;
 	errorFormAffiliate:boolean;
 	errorFormAddtixs:boolean;
@@ -36,6 +37,7 @@ export class UserWService {
 	globalCategory:boolean=true;
 	idCard:string;
 	imagePreviewProduct:string;
+	indexselected:string;
 	images:any[]=[];
 	ordersA:any[]=[];
 	info:any={};

@@ -58,6 +58,8 @@ public formBuilder: FormBuilder,
   public tix:TixInterface ={
     name:"",
     model:"",
+    idcategory:"",
+    idsub:"",
     brand:"",    
     images:[],
     price:0
@@ -69,6 +71,10 @@ public formBuilder: FormBuilder,
   public images:any[]=[];
 
   onItemSelect(item: any) {
+    this.tix.idcategory=this._uw.categories[item.item_id].idcategory;
+    this._uw.categorySelected=this._uw.categories[item.item_id].idcategory;
+    this._uw.indexselected=item.item_id;
+//   console.log(""+this._uw.categories[item.item_id].idcategory);
     this.dropdownList2 = []; 
     let size=this.categories[item.item_id-1].subs.length;
     let indice = item.item_id-1;
@@ -92,6 +98,8 @@ public formBuilder: FormBuilder,
 
   }   
    onItemSelect2(item: any) {
+    //this.tix.idsubcategory=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
+      this._uw.subcategorySelected=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
     console.log(item);
   }
   onSelectAll2(items: any) {
@@ -108,8 +116,10 @@ public formBuilder: FormBuilder,
       // let val=(this.user.id).toString();
       this.tix = this.typeValidationForm.value;
       // this.tix.userd="a"+val;
-      this.tix.modules = [];
       this.tix.status="activated";
+      this.tix.idcategory=this._uw.categorySelected;
+      this.tix.idsub=this._uw.subcategorySelected;
+     // this.tix.subcategories=this.selectedItems;
       this.tix.images=this._uw.images;
       return this.dataApiService.saveTixFree(this.tix)
         .subscribe(
