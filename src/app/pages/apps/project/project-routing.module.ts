@@ -11,7 +11,7 @@ const routes: Routes = [
     },
   
     {
-        path: 'detallecurso/:id',
+        path: 'productdetail/:id',
         component: ProjectdetailComponent
     }
 ];
