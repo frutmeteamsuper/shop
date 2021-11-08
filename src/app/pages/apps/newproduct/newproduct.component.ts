@@ -71,7 +71,7 @@ public formBuilder: FormBuilder,
   public images:any[]=[];
 
   onItemSelect(item: any) {
-    this.tix.idcategory=this._uw.categories[item.item_id].idcategory;
+ //   this.tix.idcategory=this._uw.categories[item.item_id].idcategory;
     this._uw.categorySelected=this._uw.categories[item.item_id].idcategory;
     this._uw.indexselected=item.item_id;
 //   console.log(""+this._uw.categories[item.item_id].idcategory);
@@ -100,7 +100,7 @@ public formBuilder: FormBuilder,
    onItemSelect2(item: any) {
     //this.tix.idsubcategory=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
       this._uw.subcategorySelected=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
-    console.log(item);
+  //  console.log(item);
   }
   onSelectAll2(items: any) {
     console.log(items);

@@ -50,7 +50,7 @@ export class DataApiService {
 		return this.http
 		.put<TixInterface>(url_api, tix)
 		.pipe(map(data => data));
-}
+	}
 	getAllTixs(){
 		const url_api = 'hhttps://db.buckapi.com:3032/api/tixes?filter[where][status]=activated';
 		return this.http.get(url_api);
@@ -67,7 +67,7 @@ export class DataApiService {
 		const url_api = 'https://db.buckapi.com:3032/api/order?filter[where][orderType]=appointment';
 		return this.http.get(url_api);
 	}
-		saveTixFree(tix :TixInterface){
+	saveTixFree(tix :TixInterface){
 	//	let token = this.authService.getToken();
 		const url_api='https://db.buckapi.com:3032/api/tixes';
 		return this.http
@@ -89,6 +89,10 @@ export class DataApiService {
 	getAllSuscribersReturn(){
 		const url_api = 'https://db.buckapi.com:3032/api/suscriber?filter[where][status]=new';
 		return (this.suscribers = this.http.get(url_api));
+	}
+	getAllOrdersReturn(){
+		const url_api = 'https://db.buckapi.com:3032/api/orders?filter[where][status]=new';
+		return (this.orders = this.http.get(url_api));
 	}
 	getAllCategories(){
 		const url_api = 'https://db.buckapi.com:3032/api/categories';
@@ -123,7 +127,7 @@ export class DataApiService {
 // 		.pipe(map(data => data));
 // 	}
 
-getAllSpecs(){
+	getAllSpecs(){
 		const url_api = 'https://db.buckapi.com:3032/api/specs';
 		return (this.specs = this.http.get(url_api));
 	}

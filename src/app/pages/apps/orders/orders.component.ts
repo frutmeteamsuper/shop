@@ -5,6 +5,7 @@ import { revenueAreaChart, targetsBarChart, salesDonutChart, ordersData } from '
 import { ChartType, OrdersTable } from './orders.model';
 import { DataApiService } from '../../../core/services/data-api.service';
 import { UserInterface } from '../../../core/models/user-interface'; 
+import { OrderInterface } from '../../../core/models/order-interface'; 
 import { SuscriberInterface } from '../../../core/models/suscriber-interface'; 
 import { UserWService } from "../../../core/services/user-w.service";
 import { ActivatedRoute, Params} from '@angular/router';
@@ -19,30 +20,35 @@ import { Router } from '@angular/router';
 
 export class OrdersComponent implements OnInit {
     public user:UserInterface;
-    public users:UserInterface;
+    public users:UserInterface;    
+    public order:OrderInterface;
+    public orders:OrderInterface;
   breadCrumbItems: Array<{}>;
-  constructor(  private dataApi: DataApiService,
-    public _uw:UserWService,
-    private location: Location,
-        private route:ActivatedRoute,
-    private router: Router) { }
+  constructor(  
+      private dataApi: DataApiService,
+      public _uw:UserWService,
+      private location: Location,
+      private route:ActivatedRoute,
+      private router: Router
+    ) { }
 
   revenueAreaChart: ChartType;
   targetsBarChart: ChartType;
   salesDonutChart: ChartType;
   ordersData: OrdersTable[];
-  getAllSuscribers(){
-        this.dataApi.getAllSuscribersReturn().subscribe((res:any) => {
+
+  getAllOrders(){
+        this.dataApi.getAllOrdersReturn().subscribe((res:any) => {
       if (res[0] === undefined){
         console.log("hey");
        }else{
-        this.users=res;            
+        this.orders=res;            
         }
      });  
     }
 
   ngOnInit() {
-         this.getAllSuscribers();
+         this.getAllOrders();
     this.breadCrumbItems = [{ label: 'Orders', active: true }];
 
     /**

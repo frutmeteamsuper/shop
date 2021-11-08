@@ -18,24 +18,29 @@
               <thead>
                 <tr>
             <!--       <th scope="col">#</th> -->
-                  <th scope="col">Nombre de usuario</th>
-                  <th scope="col">Respuesta</th>
+                  <th scope="col">Nombre </th>
+                  <th scope="col">email</th>
+                  <th scope="col"># Pedido</th>
                 <!--   <th scope="col">Customer</th>
                   <th scope="col">Price</th> -->
                   <!-- <th scope="col">Estado de solicitud</th> -->
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let user of users" >
+                <tr *ngFor="let order of orders" >
                   <!-- <td>{{ table.id }}</td> -->
                  <td>
                     <div class="chat-avatar" >
                     
-                  {{ user.email }}
+                  {{ order.personaContacto }}
                     </div> 
                   </td>
                   <td>
-                    {{ user.response.name }}
+                    {{ order.email }}
+                </td>
+               
+                  <td>
+                    {{ order.npedido }}
                 </td>
                  <!--  <td>{{ table.name }}</td>
                   <td>{{ table.price }}</td> -->
