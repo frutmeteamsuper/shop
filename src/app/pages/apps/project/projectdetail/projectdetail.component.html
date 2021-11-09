@@ -28,9 +28,21 @@
           <div class="mt-3">
             
           </div>
-          <h6 class="mt-0 header-title">Descripcion</h6>
+          <h6 class="mt-0 header-title">Nombre</h6>
           <div class="text-muted mt-3">
-            <p>{{tix.description}}</p>   
+            <p>{{tix.name}}</p>   
+          </div>
+          <h6 class="mt-0 header-title">Modelo</h6>
+          <div class="text-muted mt-3">
+            <p>{{tix.model}}</p>   
+          </div>
+          <h6 class="mt-0 header-title">Marca</h6>
+          <div class="text-muted mt-3">
+            <p>{{tix.brand}}</p>   
+          </div>
+          <h6 class="mt-0 header-title">Precio</h6>
+          <div class="text-muted mt-3">
+            <p>$ {{tix.price}}</p>   
           </div>
         </div>
       </div>
@@ -39,8 +51,9 @@
     <div class="col-xl-4">
       <div class="card">
         <div class="card-body">
-          <h6 class="mt-0 header-title">Modulos del curso</h6>
-          <ul>
+          <h6 class="mt-0 header-title" [hidden]="editing">Acciones</h6> 
+          <h6 class="mt-0 header-title" [hidden]="!editing">Detalles del producto</h6>
+      <!--     <ul>
             <li *ngFor="let module of tix.modules;let i = index">
                 <div class="media">
           
@@ -52,31 +65,133 @@
                 </div>
               </li>
               
-          </ul>
+          </ul> -->
             <form [formGroup]="ngFormUpdateTixData" >  
-            <div class="experience-info" [hidden]="!addModules">
+            <div class="experience-info" [hidden]="!editing">
               <div class="row form-row experience-cont">
                 <div class="col-12 col-md-10 col-lg-11">
                   <div class="row form-row">
-                    <div class="col-12 col-md-12 col-lg-12">
+              <!--       <div class="col-12 col-md-12 col-lg-12">
                       <div class="form-group">
-                        <label>Titulo del modulo</label>
+                        <label>Nombre</label>
                         <input type="text" class="form-control floating" id="newModuleTittle" formControlName="newModuleTittle" placeholder="Titulo" [(ngModel)]="newModuleTittle">
                       </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-12">
                       <div class="form-group">
-                        <label>Link </label>
+                        <label>Modelo </label>
                         <input type="text" class="form-control floating" id="newModuleLink" formControlName="newModuleLink" placeholder="Link" [(ngModel)]="newModuleLink">
                       </div>
                     </div>
                     
                     <div class="col-12 col-md-12 col-lg-12">
                       <div class="form-group">
-                        <label>Duracion</label>
+                        <label>Marca</label>
                         <input type="text" class="form-control floating" id="newModuleDuration" formControlName="newModuleDuration" placeholder="Duracion" [(ngModel)]="newModuleDuration">
                       </div>
+                    </div> -->
+                    <form (ngSubmit)="sendTix(tix)" [formGroup]="typeValidationForm">
+          <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label> Nombre del producto</label>
+                  <input type="text" class="form-control" formControlName="name"   [(ngModel)]="tix.name"
+                  [ngClass]="{'is-invalid': typesubmit && tix.name.errors}" placeholder="Nombre del producto" />
+                  <div *ngIf="typesubmit && tix.name.errors" class="invalid-feedback">
+                    <span *ngIf="tix.name.errors.required">Este campo es requerido.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Modelo</label>
+                  <input type="text" class="form-control" formControlName="model"  [(ngModel)]="tix.model"
+                    [ngClass]="{'is-invalid': typesubmit && tix.model.errors}" placeholder="Modelo" />
+                  <div *ngIf="typesubmit && tix.model.errors" class="invalid-feedback">
+                    <span *ngIf="tix.model.errors.required">Este campo es requerido.</span>
+                  </div>
+                </div>     
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Marca</label>
+                  <input type="text" class="form-control" formControlName="brand"  [(ngModel)]="tix.brand"
+                    [ngClass]="{'is-invalid': typesubmit && tix.brand.errors}" placeholder="Marca" />
+                  <div *ngIf="typesubmit && tix.brand.errors" class="invalid-feedback">
+                    <span *ngIf="tix.brand.errors.required">Este campo es requerido.</span>
+                  </div>
+                </div>   
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Precio</label>
+                  <div>
+                    <input formControlName="price" type="text" class="form-control"  [(ngModel)]="tix.price"
+                      [ngClass]="{'is-invalid': typesubmit && tix.price.errors}"
+                      placeholder="Precio del producto" />
+                    <div *ngIf="typesubmit && tix.price.errors" class="invalid-feedback">
+                      <span *ngIf="tix.price.errors.required">Este campo es requerido.</span>
                     </div>
+                  </div>
+                </div>
+              </div>
+             <!--  <div class="col-12">
+                <div class="form-group ">
+                    <label>Categoria
+                    </label>
+                   
+                      <select  class="form-control custom-select">
+                      <option *ngFor="let category of categoriesList ; let i = index; ">{{category.name}}</option>
+                                
+                                </select>
+                </div>
+              </div> -->
+
+              <div class="col-12">
+                <div class="form-group ">
+                  <label>Categoria ({{category}})
+                  <span [hidden]="loaded">Loading...</span></label>
+                  <ng-multiselect-dropdown
+                        [placeholder]="'Categoría'"
+                        [settings]="dropdownSettings"
+                        [data]="dropdownList"
+                        [(ngModel)]="selectedItems"
+                        (onSelect)="onItemSelect($event)"(onDeSelect)="onItemDeSelect($event)"
+                        (onSelectAll)="onSelectAll($event)"
+                        [ngModelOptions]="{standalone: true}">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group" [hidden]="!subs">
+                  <label>Subcategoría ({{subcategory}})
+                  <span [hidden]="loaded">Loading...</span></label>
+                  <ng-multiselect-dropdown
+                        [placeholder]="'Subcategoría'"
+                        [settings]="dropdownSettings2"
+                        [data]="dropdownList2"
+                        [(ngModel)]="selectedItems2"
+                        (onSelect)="onItemSelect2($event)"
+                        (onDeSelect)="onItemDeSelect2($event)"
+                        (onSelectAll)="onSelectAll2($event)"
+                        [ngModelOptions]="{standalone: true}">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+
+              <div class="form-group mb-0">
+                <div>
+                  <button (click)="cancel()" class="btn btn-secondary waves-effect">
+                    Cancelar
+                  </button>
+                  <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
+                    Aceptar
+                  </button>
+                </div>
+              </div>
+
+          </div>
+            </form>
                   </div>
                 </div>
               </div>
@@ -86,10 +201,10 @@
 
               
           </form>
-          <img src="assets/images/tenor.gif"   style="max-height: 32px;max-width: 32px; text-align: center; " [hidden]="!uploading">
-   <button type="button" (click)="addNewModule()" [hidden]="buttonDisabled || uploading" class="btn btn-primary mr-4 mb-3  mb-sm-0"><i class="uil-plus mr-1"></i> Agregar modulo</button>
+          <img src="assets/images/tenor.gif"   style="max-height: 32px;max-width: 32px; text-align: center; " [hidden]="!updating">
+            <button type="button" (click)="edit()" [hidden]="buttonDisabled || editing" class="btn btn-primary mr-4 mb-3  mb-sm-0"><i class="uil-plus mr-1"></i> Editar</button>
          <div class="submit-section submit-btn-bottom">
-                <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" [hidden]="!buttonDisabled || uploading" (click)="addModule()">Guardar Cambios</button>
+                <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" [hidden]="!buttonDisabled || editing" (click)="addModule()">Guardar Cambios</button>
              
               </div>
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,9 +9,10 @@ import { NgbTabsetModule, NgbProgressbarModule, NgbTooltipModule } from '@ng-boo
 
 import { ProjectlistComponent } from './projectlist/projectlist.component';
 import { ProjectdetailComponent } from './projectdetail/projectdetail.component';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @NgModule({
     imports: [
+       NgMultiSelectDropDownModule.forRoot(),
      FormsModule,
         ReactiveFormsModule,
         CommonModule,
@@ -21,6 +22,9 @@ import { ProjectdetailComponent } from './projectdetail/projectdetail.component'
         NgbTooltipModule,
         NgbProgressbarModule,
     ],
+      schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
     declarations: [ProjectlistComponent, ProjectdetailComponent],
 })
 

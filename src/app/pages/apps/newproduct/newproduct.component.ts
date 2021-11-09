@@ -23,37 +23,33 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class NewproductComponent implements OnInit {
   breadCrumbItems: Array<{}>;
-
   typeValidationForm: FormGroup; // type validation form
-    submit: boolean;
-      typesubmit: boolean;
- adapter = new DemoFilePickerAdapter(this.http,this._uw);
+  submit: boolean;
+  typesubmit: boolean;
+  adapter = new DemoFilePickerAdapter(this.http,this._uw);
   @ViewChild('uploader', { static: true }) uploader: FilePickerComponent;
-   myFiles: FilePreviewModel[] = [];
+  myFiles: FilePreviewModel[] = [];
 
   constructor(    
-public formBuilder: FormBuilder,
-    private http: HttpClient,
-    public _uw:UserWService, 
-   public location: Location,
-    public router: Router,
-    private dataApiService: DataApiService
-
-
+      public formBuilder: FormBuilder,
+      private http: HttpClient,
+      public _uw:UserWService, 
+      public location: Location,
+      public router: Router,
+      private dataApiService: DataApiService
   	) { }
   loaded = false;
   subs = false;
-
-    selectedItems = [];
+  selectedItems = [];
   dropdownList = [];
   dropdownSettings = {};
-   selectedItems2 = [];
+  selectedItems2 = [];
   dropdownList2 = [];
   dropdownSettings2 = {};
   categoriesList = {};
-   public isError = false;
-    public tixs:TixInterface;
-//    public tix:TixInterface;
+  public isError = false;
+  public tixs:TixInterface;
+//public tix:TixInterface;
   public categories:CategoryInterface ={}
   public tix:TixInterface ={
     name:"",
@@ -72,12 +68,12 @@ public formBuilder: FormBuilder,
 
   onItemSelect(item: any) {
  //   this.tix.idcategory=this._uw.categories[item.item_id].idcategory;
-    this._uw.categorySelected=this._uw.categories[item.item_id].idcategory;
-    this._uw.indexselected=item.item_id;
+    this._uw.categorySelected=this._uw.categories[item.item_id-1].idcategory;
 //   console.log(""+this._uw.categories[item.item_id].idcategory);
     this.dropdownList2 = []; 
     let size=this.categories[item.item_id-1].subs.length;
     let indice = item.item_id-1;
+    this._uw.indexselected=indice;
        for (let i=0;i<size;i++){
           this.categoryStatus2.push({filterStatus:false});
           this.dropdownList2 = this.dropdownList2.concat({
@@ -92,14 +88,13 @@ public formBuilder: FormBuilder,
   onSelectAll(items: any) {
     console.log(items);
   }   
-   onItemDeSelect(items: any) {
-
-  }onItemDeSelect2(items: any) {
-
+  onItemDeSelect(items: any) {
+  }
+  onItemDeSelect2(items: any) {
   }   
-   onItemSelect2(item: any) {
+  onItemSelect2(item: any) {
     //this.tix.idsubcategory=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
-      this._uw.subcategorySelected=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
+      this._uw.subcategorySelected=this._uw.categories[this._uw.indexselected].subs[item.item_id-1].idsub;
   //  console.log(item);
   }
   onSelectAll2(items: any) {
@@ -119,27 +114,23 @@ public formBuilder: FormBuilder,
       this.tix.status="activated";
       this.tix.idcategory=this._uw.categorySelected;
       this.tix.idsub=this._uw.subcategorySelected;
+      this._uw.categorySelected="";
+      this._uw.subcategorySelected="";
      // this.tix.subcategories=this.selectedItems;
       this.tix.images=this._uw.images;
       return this.dataApiService.saveTixFree(this.tix)
         .subscribe(
              tix => this.router.navigate(['/products'])
         );
-  }    
-    
-    
+  }        
   public okPago(){
    // let id = this._uw.order.id;
  //console.log("id disponible para enviar: "+id);
    // this.updateOrder();
     }
-
-
-
- get type() {
+  get type() {
     return this.typeValidationForm.controls;
   }
-
   /**
    * Type validation form submit data
    */
