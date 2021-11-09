@@ -96,13 +96,16 @@ export class ProjectdetailComponent implements OnInit {
 
 
 onItemSelect(item: any) {
- //   this.tix.idcategory=this._uw.categories[item.item_id].idcategory;
-    this._uw.categorySelected=this._uw.categories[item.item_id].idcategory;
-    this._uw.indexselected=item.item_id;
+
+
+
+      //   this.tix.idcategory=this._uw.categories[item.item_id].idcategory;
+    this._uw.categorySelected=this._uw.categories[item.item_id-1].idcategory;
 //   console.log(""+this._uw.categories[item.item_id].idcategory);
     this.dropdownList2 = []; 
     let size=this.categories[item.item_id-1].subs.length;
     let indice = item.item_id-1;
+    this._uw.indexselected=indice;
        for (let i=0;i<size;i++){
           this.categoryStatus2.push({filterStatus:false});
           this.dropdownList2 = this.dropdownList2.concat({
@@ -123,9 +126,10 @@ onSelectAll(items: any) {
 
 }   
 onItemSelect2(item: any) {
-  //this.tix.idsubcategory=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
-    this._uw.subcategorySelected=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
-//  console.log(item);
+
+   //this.tix.idsubcategory=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
+      this._uw.subcategorySelected=this._uw.categories[this._uw.indexselected].subs[item.item_id-1].idsub;
+  //  console.log(item);
 }
 onSelectAll2(items: any) {
   console.log(items);
