@@ -2,9 +2,7 @@ import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
-
 import { projectActivity, widgetData } from './data';
-
 import { Activity, Widget } from './projectdetai.model';
 import { DataApiService } from '../../../../core/services/data-api.service';
 import { UserWService } from "../../../../core/services/user-w.service";
@@ -35,6 +33,7 @@ export class ProjectdetailComponent implements OnInit {
       private router: Router
     ) { }
     subs = false;
+    deleting = false;
     loaded = false;
     selectedItems = [];
     dropdownList = [];
@@ -43,7 +42,6 @@ export class ProjectdetailComponent implements OnInit {
     dropdownList2 = [];
     dropdownSettings2 = {};
     categoriesList = {};
-
     addModules = false;
     uploading = false;
     editing = false;
@@ -54,7 +52,7 @@ export class ProjectdetailComponent implements OnInit {
     category="";
     subcategory="";
     newModuleDuration="";
-    ngFormUpdateTixData: FormGroup;
+    //ngFormUpdateTixData: FormGroup;
     typeValidationForm: FormGroup; // type validation form
     submit: boolean;
     public categoryStatus:any[]=[];
@@ -96,10 +94,7 @@ export class ProjectdetailComponent implements OnInit {
 
 
 onItemSelect(item: any) {
-
-
-
-      //   this.tix.idcategory=this._uw.categories[item.item_id].idcategory;
+//   this.tix.idcategory=this._uw.categories[item.item_id].idcategory;
     this._uw.categorySelected=this._uw.categories[item.item_id-1].idcategory;
 //   console.log(""+this._uw.categories[item.item_id].idcategory);
     this.dropdownList2 = []; 
@@ -126,8 +121,7 @@ onSelectAll(items: any) {
 
 }   
 onItemSelect2(item: any) {
-
-   //this.tix.idsubcategory=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
+  //this.tix.idsubcategory=this._uw.categories[this._uw.indexselected].subs[item.item_id].idsub;
       this._uw.subcategorySelected=this._uw.categories[this._uw.indexselected].subs[item.item_id-1].idsub;
   //  console.log(item);
 }
@@ -163,22 +157,7 @@ addNewModule(){
           idspec: this.categories[i].idcategory
         });
       }
-     
-      // for (let i=0;i<this.dentistSubmit.categories.length; i++){
-      //   for (let j=0;j<this._uw.totalCategories;j++){
-      //     if(this.dentistSubmit.categories[i]==this.categories[j].idspec){
-      //       this.categoryStatus[j].filterStatus=true;
-      //       this.selectedItems = this.selectedItems.concat({
-      //         id: j + 1,
-      //         item_id: j + 1,
-      //         item_text: this.categories[j].name,
-      //         idspec: this.categories[j].idcategory
-      //       });
-      //     }
-      //   }
-      // }
       this.loaded=true;
-    
     }, 10000);
 
   }
@@ -215,6 +194,7 @@ okUpdateCourse(tix){
   }
 cancel(){
   this.editing=false;
+  this.buttonDisabled=false;
 }
 determinateCategoryAndSub(tix){
 
@@ -242,12 +222,22 @@ getCourseDetail(id: string){
 go(link){
   window.open(link, "_blank");
 }
+delete(){
+  this.deleting=true;
+}
+cancelDelete(){
+  this.deleting=false;
+}
+okDelete(){
+  this.deleting=false;
+}
+
 ngOnInit() {
-     this.ngFormUpdateTixData = this.formBuilder.group({
-          newModuleLink:['',[]], 
-          newModuleDuration:['',[]], 
-          newModuleTittle:['',[]]
-      });
+     // this.ngFormUpdateTixData = this.formBuilder.group({
+     //      newModuleLink:['',[]], 
+     //      newModuleDuration:['',[]], 
+     //      newModuleTittle:['',[]]
+     //  });
        this.typeValidationForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       price: ['', [Validators.required]],
@@ -283,12 +273,13 @@ ngOnInit() {
     };
     this.getAllCategories();
      
-  }
+  } 
+
   get fval() {
-    return this.ngFormUpdateTixData.controls;
+    return this.typeValidationForm.controls;
   }
   get fval2() {
-    return this.ngFormUpdateTixData.controls;
+    return this.typeValidationForm.controls;
   }
   private _fetchData() {
     this.projectActivity = projectActivity;

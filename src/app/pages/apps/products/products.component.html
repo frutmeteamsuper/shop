@@ -5,21 +5,8 @@
     </div>
     <div class="col-md-9 col-xl-6 text-md-right">
       <div class="mt-4 mt-md-0">
-        <button type="button" routerLink="/newproduct" class="btn btn-danger mr-4 mb-3  mb-sm-0"><i class="uil-plus mr-1"></i> Nuevo
+        <button type="button" routerLink="/newproduct" class="btn btn-primary mr-4 mb-3  mb-sm-0"><i class="uil-plus mr-1"></i> Nuevo
           producto</button>
-       <!--  <div class="btn-group mb-3 mb-sm-0">
-          <button type="button" class="btn btn-primary">All</button>
-        </div>
-        <div class="btn-group ml-1">
-          <button type="button" class="btn btn-white">Ongoing</button>
-          <button type="button" class="btn btn-white">Finished</button>
-        </div> -->
-<!--         <div class="btn-group ml-2 d-none d-sm-inline-block">
-          <button type="button" class="btn btn-primary btn-sm"><i class="uil uil-apps"></i></button>
-        </div>
-        <div class="btn-group d-none d-sm-inline-block">
-          <button type="button" class="btn btn-white btn-sm"><i class="uil uil-align-left-justify"></i></button>
-        </div> -->
       </div>
     </div>
   </div>
@@ -30,16 +17,10 @@
         <div class="card-body">
           <div>
             <a routerLink="/productdetail/{{product.id}}">
-              <img src="{{ product.images[0] }}" alt="" class="" style="max-height: 190px;max-width: 280px;">
+              <img src="{{ product.images[0] }}" alt="" class="" style="max-height: 190px;max-width: 220px;">
             </a>
-          <!--   <a href="javascript: void(0);">
-              <img src="{{ product.images[1] }}" alt="" class="avatar-sm m-1 rounded-circle">
-            </a> -->
           </div>
-      <!--     <div class="badge badge-success float-right" [ngClass]="{ 'badge-warning': product.status === 'Pending'}">
-            {{ product.costPrice }}</div> -->
-        <!--   <p class="text-success text-uppercase font-size-12 mb-2"
-            [ngClass]="{ 'text-warning': product.type === 'Android'}">{{ product.description }}</p> -->
+    
           <h5 cl><a href="javascript: void(0)" class="text-dark">{{ product.name }}</a></h5>
           <p class="text-muted mb-4">{{ product.brand }}</p>
 
@@ -48,11 +29,7 @@
           <div class="row align-items-center">
             <div class="col-sm-auto">
               <ul class="list-inline mb-0">
-         <!--        <li class="list-inline-item pr-2">
-                  <a href="javascript: void(0)" class="text-muted d-inline-block" placement="top" ngbTooltip="Due date">
-                    <i class="uil uil-globe mr-1"></i> {{ product.lenguaje }}
-                  </a>
-                </li> -->
+      
                 <li class="list-inline-item pr-2">
                   <a href="javascript: void(0)" class="text-muted d-inline-block" placement="top" ngbTooltip="
                 Modelo">
@@ -64,10 +41,6 @@
                     <i class="uil  uil-money-stackmr-1"></i>$ {{ product.price }} 
                   </a>
                 </li>
-<!-- 
-                    <div class="badge badge-success float-right" [ngClass]="{ 'badge-warning': product.status === 'Pending'}">
-            {{ product.costPrice }}</div> -->
-
               </ul>
             </div>
             <div class="col offset-sm-1">
