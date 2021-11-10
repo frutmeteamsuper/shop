@@ -44,6 +44,13 @@ export class DataApiService {
   		"Content-Type":"application/json"
   	
   		});
+  	 deleteTix(id: string){
+	//	const token = this.authService.getToken();
+		const url_api=`https://db.buckapi.com:3032/api/tixes/${id}`;
+		return this.http
+		.delete<TixInterface>(url_api)
+		.pipe(map(data => data));
+	}
   	updateTix(tix :TixInterface, id: string){
 		// let token = this.authService.getToken();
 		const url_api=`https://db.buckapi.com:3032/api/tixes/${id}`;

@@ -34,6 +34,7 @@ export class ProjectdetailComponent implements OnInit {
     ) { }
     subs = false;
     deleting = false;
+    deletedMessage = false;
     loaded = false;
     selectedItems = [];
     dropdownList = [];
@@ -228,11 +229,16 @@ delete(){
 cancelDelete(){
   this.deleting=false;
 }
-okDelete(){
+okDelete(tix){
+  this.dataApi.deleteTix(tix.id).subscribe(
+   tix => this.router.navigate(['/products'])
+    );
+  this.deletedMessage=true;
   this.deleting=false;
 }
 
 ngOnInit() {
+    this.deletedMessage=false;
      // this.ngFormUpdateTixData = this.formBuilder.group({
      //      newModuleLink:['',[]], 
      //      newModuleDuration:['',[]], 
