@@ -27,7 +27,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let order of orders" >
+                <tr *ngFor="let order of orders" routerLink="/orderdetail/{{order.id}}" style="cursor: pointer;">
                   <!-- <td>{{ table.id }}</td> -->
                  <td>
                     <div class="chat-avatar" >

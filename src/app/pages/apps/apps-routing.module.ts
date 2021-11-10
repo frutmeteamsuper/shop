@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CalendarComponent } from './calendar/calendar.component';
 import { PatientsComponent } from './patients/patients.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrderdetailComponent } from './orderdetail/orderdetail.component';
 import { DentistsComponent } from './dentists/dentists.component';
 import { ProductsComponent } from './products/products.component';
 import { DentistviewComponent } from './dentistview/dentistview.component';
@@ -38,6 +39,10 @@ const routes: Routes = [
     {
         path: 'suscriptores',
         component: PatientsComponent
+    }, 
+    {
+        path: 'orderdetail/:id',
+        component: OrderdetailComponent
     },
     {
         path: 'orders',

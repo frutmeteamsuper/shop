@@ -55,8 +55,8 @@ export class DataApiService {
 		const url_api = 'hhttps://db.buckapi.com:3032/api/tixes?filter[where][status]=activated';
 		return this.http.get(url_api);
 	}
- 		getTamanoDentist(){
-	 	const url_api = 'https://db.buckapi.com:3032/api/dentist?filter[where][status]=new';
+ 		getTamanoOrders(){
+	 	const url_api = 'https://db.buckapi.com:3032/api/orders?filter[where][status]=new';
 	 	return (this.dentists = this.http.get(url_api));
 	 }
  		getTamanoSuscriber(){
@@ -150,6 +150,12 @@ export class DataApiService {
 		const url_api=`https://db.buckapi.com:3032/api/dentist/${indice}`;
 		this.dentist = this.http.get(url_api);
 		return (this.dentist);
+	}		
+	getOrderById(id:string){
+		let indice = id;
+		const url_api=`https://db.buckapi.com:3032/api/orders/${indice}`;
+		this.order = this.http.get(url_api);
+		return (this.order);
 	}	
 	getCourseDetailById(id:string){
 		let indice = id;

@@ -20,6 +20,7 @@ import { DentistviewComponent } from './dentistview/dentistview.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { PatientsComponent } from './patients/patients.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrderdetailComponent } from './orderdetail/orderdetail.component';
 import { NewproductComponent } from './newproduct/newproduct.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @NgModule({
@@ -28,6 +29,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ProjectsComponent,
     PatientsComponent,
     OrdersComponent,
+    OrderdetailComponent,
     DentistsComponent,
     ProductsComponent,
     SettingsappComponent,
